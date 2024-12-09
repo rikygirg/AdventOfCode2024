@@ -15,14 +15,16 @@ for line in lines:
 sum = 0
 for cal in calibrations:
     N = len(cal)-2
-    combinations = itertools.product([0,1], repeat=N)
+    combinations = itertools.product(['+','*','||'], repeat=N)
     for oper in combinations:
         result = cal[1]
         for i in range(len(oper)):
-            if oper[i]:
+            if oper[i] == '+':
                 result += cal[2+i]
-            else:
+            elif oper[i] == '*':
                 result *= cal[2+i]
+            else:
+                result = int(str(result) + str(cal[2+i]))
             i += 1
         if result == cal[0]:
             sum += result
